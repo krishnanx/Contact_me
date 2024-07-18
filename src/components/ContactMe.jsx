@@ -1,188 +1,375 @@
-import React,{useState}from 'react';
-import { Box, Button, IconButton, Image, Text } from "@chakra-ui/react";
-import { EmailIcon } from '@chakra-ui/icons';
-import { FaInstagram, FaTwitter, FaGithub,FaEnvelope } from 'react-icons/fa';
-import Insta from './Insta';
-import Twitter from './Twitter';
-import Github from './Github';
-
+import React, { useEffect, useState } from "react";
+import {
+  Box,
+  Stack,
+  Button,
+  IconButton,
+  Image,
+  Text,
+  transition,
+  useDisclosure,
+  Input,
+  InputGroup,
+  InputLeftElement,
+} from "@chakra-ui/react";
+import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
+import { FaInstagram, FaTwitter, FaGithub, FaEnvelope } from "react-icons/fa";
+import Insta from "./Insta";
+import Twitter from "./Twitter";
+import Github from "./Github";
+import { Fade, ScaleFade, Slide, SlideFade, Collapse } from "@chakra-ui/react";
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+} from "@chakra-ui/react";
 
 const ContactMe = () => {
-  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsclicked] = useState(false);
+  const { isOpen, onToggle } = useDisclosure();
+  const [Einput, setEInput] = useState("");
+  const [Ninput,setNInput] = useState("")
+  const [Pinput,setPInput] = useState("")
+  const [EisError, setEIsError] = useState(false);
+  const [NisError, setNIsError] = useState(false);
+  const [PisError, setPIsError] = useState(false);
 
-  const handleMouseEnter = () => setIsHovered(true);
-  const handleMouseLeave = () => setIsHovered(false);
+  const handleInputChange = (e) => setEInput(e.target.value);
+  const handleNameChange = (e) => setNInput(e.target.value);
+  const handlePhoneChange = (e) => setPInput(e.target.value);
+  //const isError = input === "";
+  const handleClick = () => {
+    setIsclicked((prevState) => !prevState); // Toggle isClicked state
+  };
+  const handleSubmitClick = () => {
+    setIsclicked((prevState) => !prevState); // Toggle isClicked state
+    try {
+      input === ""? setEIsError(true) : setEIsError(false);
+      name==="" ? setNIsError(true) : setNIsError(false);
+      phone===""? setPIsError(true) : setPIsError(false);
+      console.log(phone)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    try {
+      //console.log("click", isClicked);
+      console.log("Eerror", EisError);
+      console.log("Nerror", NisError);
+      console.log("Perror", PisError);
+      console.log(".................")
+
+    } catch (error) {}
+  }, [isClicked]);
+  const theme = {
+    //display:isClicked?"flex":"none",
+    backgroundColor: !EisError && !NisError && !PisError ? isClicked ? "#fbb9b6" : "none" :null ,
+    borderRadius: "32px",
+    width:!EisError && !NisError && !PisError ? isClicked ? "500px" : "0px" : "500px",
+    transition:!EisError && !NisError && !PisError ? "width 1s ease-in-out": null,
+  };
   return (
-    <Box  
-      borderWidth="1px" 
-      textAlign="center"
-      w="280px"
-      h="280px"
-      bgColor="white"
-      borderRadius="32px"
-      p="3px"
-      pos="relative"
-      boxShadow="#604b4a30 0px 70px 30px -50px"
-      transition="all 0.5s ease-in-out"
-      _hover={{'.bottom': {
-          top: '20%',
-          borderRadius: '80px 29px 29px 29px',
-          transitionDelay: '0.2s',
-        }, 
-        '.profile-pic': {
-          width: '100px',
-          height: '100px',
-          aspectRatio: 1,
-          top: '10px',
-          left: '10px',
-          borderRadius: '50%',
-          zIndex: 3,
-          border: '7px solid #fbb9b6',
-          boxShadow: 'rgba(96, 75, 74, 0.1882352941) 0px 5px 5px 0px',
-          transition: 'all 0.5s ease-in-out, z-index 0.5s ease-in-out 0.1s',
-        },
-        /*'.profile-pic:hover': {
-          transform: 'scale(1.3)',
-          borderRadius: '0px',
-          transition: 'transform 0.5s ease, border-radius 0.5s ease',
-        },*/
-        
-        borderTopLeftRadius: '55px' }}
+    <Box
+      w="100%"
+      h="700px"
+      position="relative"
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
     >
-      <Button 
-        aria-label="Mail" 
-        icon={<EmailIcon />} 
-        className="mail" 
-        mb={4}
-        position="absolute"
-        right="1.2rem"
-        top="0.5rem"
-        background="transparent"
-        border="none"
-        w="50px"
-        h="50px"
-        
-        >
-          
-          <Box
-          as="svg"
-          className="lucide lucide-mail"
-          stroke-linejoin="round"
-          stroke-linecap="round"
-          //stroke-width="2"
-          //stroke="currentColor"
-          fill="none"
-          viewBox="0 0 24 24"
-          height="24"
-          width="24"
-          xmlns="http://www.w3.org/2000/svg"
-          stroke="#fbb9b6"
-          strokeWidth="3px"
-          _hover={{stroke: '#f55d56'}}
-          
-          >
-          <rect rx="2" y="4" x="2" height="16" width="20"></rect>
-          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-        </Box>
-      </Button>
-      <Box 
-      className="profile-pic"
-      position="absolute"
-      width="calc(100% - 6px)"
-      height="calc(100% - 6px)"
-      top="3px"
-      left="3px"
-      borderRadius="29px"
-      zIndex="1"
-      borderWidth="0px"
-      borderColor="#fbb9b6"
-      overflow="hidden"
-      transition="all 0.5s ease-in-out 0.2s, z-index 0.5s ease-in-out 0.2s"
-      >
-      </Box>
-      <Box 
-        className='bottom'
-        position="absolute"
+      <Box
+        style={theme}
+        w="0px"
+        h="400px"
+        bgColor="#fbb9b6"
+        borderRadius="32px"
         display="flex"
         flexDirection="column"
+        justifyContent="space-evenly"
         alignItems="center"
-        justifyContent="space-between"
-        bottom="1px"
-        left="3px"
-        right="3px"
-        background="#fbb9b6"
-        top="80%"
-        borderRadius="29px"
-        zIndex="2"
-        boxShadow="inset 0px 5px 5px 0px rgba(96, 75, 74, 0.1882352941)"
-        overflow="hidden"
-        transition="all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0s"
+      >
+        <FormControl isRequired w="90%" mt="10px" isInvalid={NisError}>
+          <FormLabel w="200px">First name</FormLabel>
+          <InputGroup
+            w="100%"
+            display="flex"
+            flexDirection="column"
+          >
+            <Input
+              placeholder="First name"
+              w="400px"
+              border="solid"
+              borderColor="black"
+              value={name}
+              onChange={handleNameChange}
+            />
+            {!NisError ? (
+              <FormHelperText></FormHelperText>
+            ) : (
+              <FormErrorMessage>Name is required.</FormErrorMessage>
+            )}
+          </InputGroup>
+        </FormControl>
+        <FormControl isRequired w="90%" mt="10px" isInvalid={PisError}>
+          <FormLabel w="200px">Phone No</FormLabel>
+          <InputGroup w="100%" display="flex" flexDirection="column">
+            <InputLeftElement pointerEvents="none">
+              <PhoneIcon color="black" />
+            </InputLeftElement>
+            <Input
+              type="number"
+              placeholder="Phone number"
+              w="400px"
+              border="solid"
+              borderColor="black"
+              value={phone}
+              onChange={handlePhoneChange}
+            />
+            {!PisError ? (
+              <FormHelperText></FormHelperText>
+            ) : (
+              <FormErrorMessage>Phone number is required.</FormErrorMessage>
+            )}
+          </InputGroup>
+        </FormControl>
+        <FormControl isRequired w="90%" mt="10px" isInvalid={EisError}>
+          <FormLabel w="200px">Email</FormLabel>
+          <InputGroup w="100%" display="flex" flexDirection="column">
+            <Input
+              placeholder="Email"
+              w="400px"
+              border="solid"
+              borderColor="black"
+              type="email"
+              value={input}
+              onChange={handleInputChange}
+            />
+            {!EisError ? (
+              <FormHelperText></FormHelperText>
+            ) : (
+              <FormErrorMessage>Email is required.</FormErrorMessage>
+            )}
+          </InputGroup>
+        </FormControl>
+      </Box>
+
+      <Box
+        borderWidth="1px"
+        textAlign="center"
+        w="500px"
+        h="400px"
+        bgColor="white"
+        borderRadius="32px"
+        p="3px"
+        pos="relative"
+        boxShadow="#604b4a30 0px 70px 30px -50px"
+        transition="all 0.5s ease-in-out"
+        _hover={{
+          ".bottom": {
+            top: "20%",
+            borderRadius: "80px 29px 29px 29px",
+            transitionDelay: "0.2s",
+          },
+          ".profile-pic": {
+            width: "100px",
+            height: "100px",
+            aspectRatio: 1,
+            top: "10px",
+            left: "10px",
+            borderRadius: "50%",
+            zIndex: 3,
+            border: "7px solid #fbb9b6",
+            boxShadow: "rgba(96, 75, 74, 0.1882352941) 0px 5px 5px 0px",
+            transition: "all 0.5s ease-in-out, z-index 0.5s ease-in-out 0.1s",
+          },
+          /*'.profile-pic:hover': {
+            transform: 'scale(1.3)',
+            borderRadius: '0px',
+            transition: 'transform 0.5s ease, border-radius 0.5s ease',
+          },*/
+
+          borderTopLeftRadius: "55px",
+        }}
+      >
+        <Button
+          aria-label="Mail"
+          icon={<EmailIcon />}
+          className="mail"
+          mb={4}
+          position="absolute"
+          right="1.2rem"
+          top="0.5rem"
+          background="transparent"
+          border="none"
+          w="50px"
+          h="50px"
         >
-          <Box 
-          className="content"
+          <Box
+            as="svg"
+            className="lucide lucide-mail"
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            //stroke-width="2"
+            //stroke="currentColor"
+            fill="none"
+            viewBox="0 0 24 24"
+            height="24"
+            width="24"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="#fbb9b6"
+            strokeWidth="3px"
+            _hover={{ stroke: "#f55d56" }}
+          >
+            <rect rx="2" y="4" x="2" height="16" width="20"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </Box>
+        </Button>
+        <Box
+          className="profile-pic"
+          position="absolute"
+          width="calc(100% - 6px)"
+          height="calc(100% - 6px)"
+          top="3px"
+          left="3px"
+          borderRadius="29px"
+          zIndex="1"
+          borderWidth="0px"
+          borderColor="#fbb9b6"
+          overflow="hidden"
+          transition="all 0.5s ease-in-out 0.2s, z-index 0.5s ease-in-out 0.2s"
+        ></Box>
+        <Box
+          className="bottom"
+          position="absolute"
           display="flex"
           flexDirection="column"
           alignItems="center"
-          position="absolute"
-          bottom="0"
-          left="1.5rem"
-          right="1.5rem"
-          height="170px"
-            
+          justifyContent="space-between"
+          bottom="1px"
+          left="3px"
+          right="3px"
+          background="#fbb9b6"
+          top="80%"
+          borderRadius="29px"
+          zIndex="2"
+          boxShadow="inset 0px 5px 5px 0px rgba(96, 75, 74, 0.1882352941)"
+          overflow="hidden"
+          transition="all 0.5s cubic-bezier(0.645, 0.045, 0.355, 1) 0s"
+        >
+          <Box
+            className="content"
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            position="absolute"
+            bottom="0"
+            left="1.5rem"
+            right="1.5rem"
+            height="170px"
           >
-            <Box as="span" 
-            className="name"
-            display="block"
-            fontSize="1.2rem"
-            color="white"
-            fontWeight="bold"
-            >My Name</Box>
-            <Box 
-            as="span"
-            className="about-me"
-            display="block"
-            fontSize="0.9rem"
-            color="white"
-            marginTop="1rem"
-              >Lorem ipsum dolor sit amet consectetur adipisicinFcls
+            <Box
+              as="span"
+              className="name"
+              display="block"
+              fontSize="1.2rem"
+              color="white"
+              fontWeight="bold"
+            >
+              My Name
+            </Box>
+            <Box
+              as="span"
+              className="about-me"
+              display="block"
+              fontSize="0.9rem"
+              color="white"
+              marginTop="1rem"
+            >
+              Lorem ipsum dolor sit amet consectetur adipisicinFcls
             </Box>
           </Box>
-          <Box 
+          <Box
             className="bottom-bottom"
             position="absolute"
             left="1.5rem"
             right="1.5rem"
-            bottom="1px"
+            bottom="10px"
             display="flex"
             alignItems="center"
             justifyContent="space-between"
             h="50px"
           >
-            <Box 
-            className="social-links-container"
-            display="flex"
-            gap="1rem"
-            >
-              <Insta/>
-              <Twitter/>
-              <Github/>
+            <Box className="social-links-container" display="flex" gap="1rem">
+              <Insta />
+              <Twitter />
+              <Github />
             </Box>
-            <Button 
-            className="button"
-            bg="white"
-            color="#fbb9b6"
-            border="none"
-            borderRadius="20px"
-            fontSize="xs"
-            px="2"
-            py="1"
-            boxShadow="0px 5px 5px rgba(165, 132, 130, 0.1333333333)"
-            _hover={{ bg: '#f55d56', color: 'white' }}
-            >Contact Me</Button>
+            {!(!EisError && !NisError && !PisError)?(
+              <Button
+                className="button"
+                bg="white"
+                color="#fbb9b6"
+                border="none"
+                borderRadius="20px"
+                fontSize="xs"
+                px="2"
+                py="1"
+                boxShadow="0px 5px 5px rgba(165, 132, 130, 0.1333333333)"
+                _hover={{ bg: "#f55d56", color: "white" }}
+                onClick={handleSubmitClick}
+                //onChange={handleClick}
+              >
+                Check again!
+              </Button>
+            ) : isClicked ? (
+              <Button
+                className="button"
+                bg="white"
+                color="#fbb9b6"
+                border="none"
+                borderRadius="20px"
+                fontSize="xs"
+                px="2"
+                py="1"
+                boxShadow="0px 5px 5px rgba(165, 132, 130, 0.1333333333)"
+                _hover={{ bg: "#f55d56", color: "white" }}
+                onClick={handleSubmitClick}
+                //onChange={handleClick}
+              >
+                Submit
+              </Button>
+            ) : (
+              <Button
+                className="button"
+                bg="white"
+                color="#fbb9b6"
+                border="none"
+                borderRadius="20px"
+                fontSize="xs"
+                px="2"
+                py="1"
+                boxShadow="0px 5px 5px rgba(165, 132, 130, 0.1333333333)"
+                _hover={{ bg: "#f55d56", color: "white" }}
+                onClick={handleClick}
+                //onChange={handleClick}
+              >
+                Contact Me
+              </Button>
+            )}
           </Box>
+        </Box>
       </Box>
+      <Box
+        style={theme}
+        w="0px"
+        h="400px"
+        bgColor="#fbb9b6"
+        borderRadius="32px"
+      ></Box>
     </Box>
   );
-}
+};
 
 export default ContactMe;
