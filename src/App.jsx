@@ -2,6 +2,7 @@ import react,{ useState } from 'react'
 import { Center, ChakraProvider } from '@chakra-ui/react'
 import './App.css'
 import ContactMe from './components/ContactMe'
+import DetailsContext from './components/contexts/DetailsContext'
 
 function App() {
   const theme={
@@ -15,7 +16,10 @@ function App() {
   return (
     <div style={theme}>
       <ChakraProvider>
-        <ContactMe/>
+        <DetailsContext>
+          <ContactMe/>
+        </DetailsContext>
+        
       </ChakraProvider>
 
     </div>

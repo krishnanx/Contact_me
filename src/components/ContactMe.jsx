@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import { Details } from "./contexts/DetailsContext";
 import {
   Box,
   Stack,
@@ -11,6 +12,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  
 } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import { FaInstagram, FaTwitter, FaGithub, FaEnvelope } from "react-icons/fa";
@@ -26,50 +28,182 @@ import {
 } from "@chakra-ui/react";
 
 const ContactMe = () => {
-  const [isClicked, setIsclicked] = useState(false);
+  const [isClicked, setIsclicked] = useState(null);
   const { isOpen, onToggle } = useDisclosure();
   const [Einput, setEInput] = useState("");
-  const [Ninput,setNInput] = useState("")
-  const [Pinput,setPInput] = useState("")
-  const [EisError, setEIsError] = useState(false);
-  const [NisError, setNIsError] = useState(false);
-  const [PisError, setPIsError] = useState(false);
+  const [Ninput, setNInput] = useState("");
+  const [Pinput, setPInput] = useState("");
+  const [EisError, setEIsError] = useState(null);
+  const [NisError, setNIsError] = useState(null);
+  const [PisError, setPIsError] = useState(null);
+  const [check,setIsChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [name, setName, phone, setPhone, email, setEmail] = useContext(Details);
 
-  const handleInputChange = (e) => setEInput(e.target.value);
-  const handleNameChange = (e) => setNInput(e.target.value);
-  const handlePhoneChange = (e) => setPInput(e.target.value);
+  const handleInputChange = (e) => {
+    setEInput(e.target.value);
+  };
+  const handleNameChange = (e) => {
+    setNInput(e.target.value);
+  };
+  const handlePhoneChange = (e) => {
+    setPInput(e.target.value);
+  };
+
   //const isError = input === "";
-  const handleClick = () => {
+  const handleClick = (e) => {
+    e.preventDefault();
+
     setIsclicked((prevState) => !prevState); // Toggle isClicked state
   };
-  const handleSubmitClick = () => {
-    setIsclicked((prevState) => !prevState); // Toggle isClicked state
+  const handleCheckClick = (e) => {
+    e.preventDefault()
+    
+    //setIsChecked(true) //toggle isChecked state
+    //setIsclicked((prevState) => !prevState) //toggle isClicked state
     try {
-      input === ""? setEIsError(true) : setEIsError(false);
-      name==="" ? setNIsError(true) : setNIsError(false);
-      phone===""? setPIsError(true) : setPIsError(false);
-      console.log(phone)
+      Einput === "" ? (setIsChecked(true),setEIsError(true)) : (setIsChecked(false),setEIsError(false));
+      Ninput === "" ? (setIsChecked(true),setNIsError(true)) : (setIsChecked(false),setNIsError(false));
+      Pinput === "" ? (setIsChecked(true),setPIsError(true)) : (setIsChecked(false),setPIsError(false));
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  function isValidGmail(email) {
+    const regex = /^[^\s@]+@gmail\.com$/;
+    return regex.test(email);
+  }
+
+  const handleSubmitClick = (e) => {
+    e.preventDefault();
+    //console.log(Einput)
+    //setIsChecked(false)
+    
+    // Simulate a network request
+    
+    // Toggle isClicked state
+    //setIsChecked(false)
+    try {
+      Einput === "" ? setEIsError(true) : setEIsError(false);
+      Ninput === "" ? setNIsError(true) : setNIsError(false);
+      Pinput === "" ? setPIsError(true) : setPIsError(false);
+      /*!(!name || !phone || !email)
+      ? null
+      : )*/
+      
+     //setLoading(true)
+      setTimeout(() => {
+        setLoading(true);
+        
+        // Hide the loading indicator after another 2 seconds and log the data
+        setTimeout(() => {
+          setLoading(false);
+        },1000);
+      },100);
+      if(!(!Ninput && !Pinput && !Einput)){
+        
+        /*try {
+          console.log(email)
+        } catch (error) {
+          console.log(error)
+        }*/
+        if(isValidGmail(Einput)){
+          console.log("ITS VALIDDD")
+          setName(Ninput)
+          setPhone(Pinput)
+          setEmail(Einput)
+          
+         
+          setIsclicked(false)
+        }
+        else{
+          console.log("ITS not VALIDD")
+          setEmail(null)
+          setEIsError(true)
+          setIsclicked(true)
+          setEInput("")
+          
+        }
+      }
+      /*!(!name && !phone && !email)
+      ? )
+      : null*/
+        
+      /*(name === null || phone === null || email === null)
+        ? null
+        : (console.log("Name:", name),
+          console.log("Phone No:", phone),
+          console.log("Email:", email));*/
+      //console.log(phone)
+      /*!(!EisError && !NisError && !PisError) ? null : setName(Ninput),
+        setPhone(Pinput),
+        setEmail(Einput);
+        if (!(EisError || NisError || PisError)) {
+          // All errors are false
+          console.log("Name:", name);
+          console.log("Phone No:", phone);
+          console.log("Email:", email);
+        } else {
+          // At least one error is true
+          return null;
+        }*/
+      
+        
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    try {
-      //console.log("click", isClicked);
-      console.log("Eerror", EisError);
-      console.log("Nerror", NisError);
-      console.log("Perror", PisError);
-      console.log(".................")
-
-    } catch (error) {}
+    if(!(!Ninput && !Pinput && !Einput)){
+      try {
+        console.log("Name:", name)
+        console.log("Phone No:", phone)
+        console.log("Email:", email)
+        setEInput("")
+        setNInput("")
+        setPInput("")
+      } catch (error) {
+        console.log(error)
+      }
+    }
+      
   }, [isClicked]);
+  /*useEffect(()=>{
+    console.log(".......................")
+    console.log("click:",isClicked)
+    console.log(".......................")
+  },[isClicked])
+  useEffect(()=>{
+    console.log(".......................")
+    console.log("check",check)
+    console.log(".......................")
+
+  },[check])*/
   const theme = {
     //display:isClicked?"flex":"none",
-    backgroundColor: !EisError && !NisError && !PisError ? isClicked ? "#fbb9b6" : "none" :null ,
+    backgroundColor:
+      !EisError && !NisError && !PisError
+        ? isClicked
+          ? "#fbb9b6"
+          : "none"
+        : "#fbb9b6",
     borderRadius: "32px",
-    width:!EisError && !NisError && !PisError ? isClicked ? "500px" : "0px" : "500px",
-    transition:!EisError && !NisError && !PisError ? "width 1s ease-in-out": null,
+    width:
+      !EisError && !NisError && !PisError
+        ? isClicked
+          ? "500px"
+          : "0px"
+        : "500px",
+    transition:
+      !EisError && !NisError && !PisError ? "width 1s ease-in-out" : "none",
   };
+  const buttonStyle = {
+    loadingText:"Submitting",
+    colorScheme:'teal',
+    variant:'outline'
+  
+  }
+ 
   return (
     <Box
       w="100%"
@@ -92,17 +226,13 @@ const ContactMe = () => {
       >
         <FormControl isRequired w="90%" mt="10px" isInvalid={NisError}>
           <FormLabel w="200px">First name</FormLabel>
-          <InputGroup
-            w="100%"
-            display="flex"
-            flexDirection="column"
-          >
+          <InputGroup w="100%" display="flex" flexDirection="column">
             <Input
               placeholder="First name"
               w="400px"
               border="solid"
               borderColor="black"
-              value={name}
+              value={Ninput}
               onChange={handleNameChange}
             />
             {!NisError ? (
@@ -124,7 +254,7 @@ const ContactMe = () => {
               w="400px"
               border="solid"
               borderColor="black"
-              value={phone}
+              value={Pinput}
               onChange={handlePhoneChange}
             />
             {!PisError ? (
@@ -143,7 +273,7 @@ const ContactMe = () => {
               border="solid"
               borderColor="black"
               type="email"
-              value={input}
+              value={Einput}
               onChange={handleInputChange}
             />
             {!EisError ? (
@@ -306,7 +436,7 @@ const ContactMe = () => {
               <Twitter />
               <Github />
             </Box>
-            {!(!EisError && !NisError && !PisError)?(
+            {!(!EisError && !NisError && !PisError) ? (
               <Button
                 className="button"
                 bg="white"
@@ -319,11 +449,13 @@ const ContactMe = () => {
                 boxShadow="0px 5px 5px rgba(165, 132, 130, 0.1333333333)"
                 _hover={{ bg: "#f55d56", color: "white" }}
                 onClick={handleSubmitClick}
+                isLoading={loading}
+                style={buttonStyle}
                 //onChange={handleClick}
               >
-                Check again!
+                Check again
               </Button>
-            ) : isClicked ? (
+            ) :  (isClicked ? (
               <Button
                 className="button"
                 bg="white"
@@ -336,6 +468,9 @@ const ContactMe = () => {
                 boxShadow="0px 5px 5px rgba(165, 132, 130, 0.1333333333)"
                 _hover={{ bg: "#f55d56", color: "white" }}
                 onClick={handleSubmitClick}
+                isLoading={loading}
+                style={buttonStyle}
+               
                 //onChange={handleClick}
               >
                 Submit
@@ -357,7 +492,7 @@ const ContactMe = () => {
               >
                 Contact Me
               </Button>
-            )}
+            ))}
           </Box>
         </Box>
       </Box>
