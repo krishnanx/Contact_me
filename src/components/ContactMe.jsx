@@ -314,12 +314,12 @@ const ContactMe = () => {
             : { base: "350px", md: "350px",lg:"400px"}
           
         }
-        opacity={
+        /*opacity={
           !EisError && !NisError && !PisError && !SisError
             ? isClicked
               ? "1"
               : "0"
-            : "1"}
+            : "1"}*/
         //w={{base:"300px",md:"500px"}}
         h={{ base: "400px", md: "400px" }}
       >
@@ -354,7 +354,7 @@ const ContactMe = () => {
 
             }
             transition={!EisError && !NisError && !PisError && !SisError
-              ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+              ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out"}
               : "none"}
           >
             First name
@@ -386,7 +386,7 @@ const ContactMe = () => {
                       : "0"
                     : "1"}
                     transition={!EisError && !NisError && !PisError && !SisError
-                      ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+                      ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out"}
                       : "none"}
             />
             {!NisError ? (
@@ -420,7 +420,7 @@ const ContactMe = () => {
                 : "0px"
               : {base:'200px',md:"300px"}}
               transition={!EisError && !NisError && !PisError && !SisError
-                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out"}
+                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out"}
                 : "none"}
           style={TextStyle}>
             Phone No
@@ -444,7 +444,7 @@ const ContactMe = () => {
                     : "0"
                   : "1"}
                   transition={!EisError && !NisError && !PisError && !SisError
-                    ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+                    ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out"}
                     : "none"}
               border="solid"
               borderColor="black"
@@ -483,7 +483,7 @@ const ContactMe = () => {
                 : "0px"
               : {base:'100px',md:"300px"}}
               transition={!EisError && !NisError && !PisError && !SisError
-                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out"}
+                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out"}
                 : "none"}
            style={TextStyle}
            >
@@ -509,7 +509,7 @@ const ContactMe = () => {
                   : "0"
                 : "1"}
               transition={!EisError && !NisError && !PisError && !SisError
-                ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+                ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out"}
                 : "none"}
             />
             {!EisError ? (
@@ -571,7 +571,7 @@ const ContactMe = () => {
           border="none"
           w="50px"
           h="50px"
-          x={{
+          sx={{
             WebkitTapHighlightColor: "transparent",
           }}
           onClick ={moveToEmail}
@@ -772,16 +772,17 @@ const ContactMe = () => {
             : { base: "350px", md: "350px",lg:"400px" }
         }
         h={{ base: "400px", md: "400px" }}
-        opacity={
+        /*opacity={
           !EisError && !NisError && !PisError && !SisError
             ? isClicked
               ? "1"
               : "0"
-            : "1"}
+            : "1"}*/
       >
         <FormControl
           isRequired
           w="90%"
+          h="200px"
           mt="10px"
           isInvalid={SisError}
           sx={FormStyle}
@@ -800,13 +801,13 @@ const ContactMe = () => {
                 ? "1"
                 : "0"
               : "1"}
-          w={!EisError && !NisError && !PisError && !SisError
+            w={!EisError && !NisError && !PisError && !SisError
               ? isClicked
-                ? {base:'200px',md:"300px"}
+                ? {base:'200px',md:"400px"}
                 : "0px"
-              : {base:'200px',md:"300px"}}
+              : {base:'200px',md:"400px"}}
               transition={!EisError && !NisError && !PisError && !SisError
-                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out"}
+                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out,opacity 2s ease-in-out"}
                 : "none"}
             
           >
@@ -835,7 +836,7 @@ const ContactMe = () => {
                     : "0"
                   : "1"}
                   transition={!EisError && !NisError && !PisError && !SisError
-                    ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+                    ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out,opacity 2s ease-in-out"}
                     : "none"}
               h="auto"
             />
