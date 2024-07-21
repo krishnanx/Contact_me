@@ -16,6 +16,7 @@ import {
   InputGroup,
   InputLeftElement,
   Center,
+  Textarea,
 } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import { FaInstagram, FaTwitter, FaGithub, FaEnvelope } from "react-icons/fa";
@@ -304,9 +305,9 @@ const ContactMe = () => {
         w={
           !EisError && !NisError && !PisError && !SisError
             ? isClicked
-              ? { base: "350px", md: "500px" }
+              ? { base: "350px", md: "400px" }
               : "0px"
-            : { base: "350px", md: "500px" }
+            : { base: "350px", md: "400px" }
           
         }
         opacity={
@@ -343,9 +344,9 @@ const ContactMe = () => {
             w={
               !EisError && !NisError && !PisError && !SisError
                 ? isClicked
-                  ? { base: "100px", md: "400px" }
+                  ? { base: "100px", md: "300px" }
                   : "100px"
-                : { base: "100px", md: "400px" }
+                : { base: "100px", md: "300px" }
 
             }
             transition={!EisError && !NisError && !PisError && !SisError
@@ -371,9 +372,9 @@ const ContactMe = () => {
               style={TextStyle}
               w={!EisError && !NisError && !PisError && !SisError
                 ? isClicked
-                  ? {base:'250px',md:"400px"}
+                  ? {base:'250px',md:"300px"}
                   : "0px"
-                : {base:'250px',md:"400px"}}
+                : {base:'250px',md:"300px"}}
                 opacity={
                   !EisError && !NisError && !PisError && !SisError
                     ? isClicked
@@ -411,9 +412,9 @@ const ContactMe = () => {
               : "1"}
           w={!EisError && !NisError && !PisError && !SisError
               ? isClicked
-                ? {base:'200px',md:"400px"}
+                ? {base:'200px',md:"300px"}
                 : "0px"
-              : {base:'200px',md:"400px"}}
+              : {base:'200px',md:"300px"}}
               transition={!EisError && !NisError && !PisError && !SisError
                 ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out"}
                 : "none"}
@@ -429,9 +430,9 @@ const ContactMe = () => {
               placeholder="Phone number"
               w={!EisError && !NisError && !PisError && !SisError
                 ? isClicked
-                  ? {base:'250px',md:"400px"}
+                  ? {base:'250px',md:"300px"}
                   : "0px"
-                : {base:'250px',md:"400px"}}
+                : {base:'250px',md:"300px"}}
               opacity={
                 !EisError && !NisError && !PisError && !SisError
                   ? isClicked
@@ -474,9 +475,9 @@ const ContactMe = () => {
               : "1"}
           w={!EisError && !NisError && !PisError && !SisError
               ? isClicked
-                ? {base:'100px',md:"400px"}
+                ? {base:'100px',md:"300px"}
                 : "0px"
-              : {base:'100px',md:"400px"}}
+              : {base:'100px',md:"300px"}}
               transition={!EisError && !NisError && !PisError && !SisError
                 ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out"}
                 : "none"}
@@ -489,9 +490,9 @@ const ContactMe = () => {
               placeholder="Email"
               w={!EisError && !NisError && !PisError && !SisError
                 ? isClicked
-                  ? {base:'250px',md:"400px"}
+                  ? {base:'250px',md:"300px"}
                   : "0px"
-                : {base:'250px',md:"400px"}}
+                : {base:'250px',md:"300px"}}
               border="solid"
               borderColor="black"
               type="email"
@@ -754,9 +755,9 @@ const ContactMe = () => {
         w={
           !EisError && !NisError && !PisError && !SisError
             ? isClicked
-              ? { base: "350px", md: "500px" }
+              ? { base: "350px", md: "400px" }
               : "0px"
-            : { base: "350px", md: "500px" }
+            : { base: "350px", md: "400px" }
         }
         h={{ base: "400px", md: "400px" }}
         opacity={
@@ -789,9 +790,9 @@ const ContactMe = () => {
               : "1"}
           w={!EisError && !NisError && !PisError && !SisError
               ? isClicked
-                ? {base:'200px',md:"400px"}
+                ? {base:'200px',md:"300px"}
                 : "0px"
-              : {base:'200px',md:"400px"}}
+              : {base:'200px',md:"300px"}}
               transition={!EisError && !NisError && !PisError && !SisError
                 ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out"}
                 : "none"}
@@ -800,19 +801,21 @@ const ContactMe = () => {
             Tell us more
           </FormLabel>
           <InputGroup w="100%" display="flex" flexDirection="column">
-            <Input
+            <Textarea
+              autogrow = {5}
               placeholder="Subject"
               //w="400px"
               border="solid"
               borderColor="black"
+              multiple={true}
               value={Sinput}
               onChange={handleSubjectChange}
               style={TextStyle}
               w={!EisError && !NisError && !PisError && !SisError
                 ? isClicked
-                  ? {base:'250px',md:"400px"}
+                  ? {base:'250px',md:"300px"}
                   : "0px"
-                : {base:'250px',md:"400px"}}
+                : {base:'250px',md:"300px"}}
               opacity={
                 !EisError && !NisError && !PisError && !SisError
                   ? isClicked
@@ -822,6 +825,7 @@ const ContactMe = () => {
                   transition={!EisError && !NisError && !PisError && !SisError
                     ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
                     : "none"}
+              h="auto"
             />
             {!SisError ? (
               <FormHelperText></FormHelperText>
