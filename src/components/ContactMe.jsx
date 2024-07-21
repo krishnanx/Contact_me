@@ -803,12 +803,12 @@ const ContactMe = () => {
               : "1"}
             w={!EisError && !NisError && !PisError && !SisError
               ? isClicked
-                ? {base:'200px',md:"400px"}
-                : "0px"
-              : {base:'200px',md:"400px"}}
+                ? {base:'200px',md:"300px"}
+                : "100px"
+              : {base:'200px',md:"300px"}}
               transition={!EisError && !NisError && !PisError && !SisError
-                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out,opacity 2s ease-in-out"}
-                : "none"}
+                ? isClicked? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out,opacity 0.2s fade"}
+                : "none":{base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out,opacity 0.2s fade"}}
             
           >
             Tell us more
@@ -827,7 +827,7 @@ const ContactMe = () => {
               w={!EisError && !NisError && !PisError && !SisError
                 ? isClicked
                   ? {base:'250px',md:"300px"}
-                  : "0px"
+                  : "100px"
                 : {base:'250px',md:"300px"}}
               opacity={
                 !EisError && !NisError && !PisError && !SisError
@@ -836,8 +836,8 @@ const ContactMe = () => {
                     : "0"
                   : "1"}
                   transition={!EisError && !NisError && !PisError && !SisError
-                    ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out,opacity 2s ease-in-out"}
-                    : "none"}
+                    ? isClicked?{base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out,opacity 0.2s fade"}
+                    : "none":{base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out,opacity 2s ease-in-out",lg:"width 1s ease-in-out,opacity 0.2s fade"}}
               h="auto"
             />
             {!SisError ? (
