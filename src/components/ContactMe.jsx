@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useContext } from "react";
 import { Details } from "./contexts/DetailsContext";
+import pic from "../assets/pix1.jpg";
+//import roboto from url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 import {
   Box,
   Stack,
@@ -12,7 +15,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  
+  Center,
 } from "@chakra-ui/react";
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import { FaInstagram, FaTwitter, FaGithub, FaEnvelope } from "react-icons/fa";
@@ -26,19 +29,27 @@ import {
   FormErrorMessage,
   FormHelperText,
 } from "@chakra-ui/react";
-
+//import styled from 'styled-components';
 const ContactMe = () => {
+  /* const Paragraph = styled.p`
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  `;*/
   const [isClicked, setIsclicked] = useState(null);
   const { isOpen, onToggle } = useDisclosure();
   const [Einput, setEInput] = useState("");
   const [Ninput, setNInput] = useState("");
   const [Pinput, setPInput] = useState("");
+  const [Sinput, setSInput] = useState("");
   const [EisError, setEIsError] = useState(null);
   const [NisError, setNIsError] = useState(null);
   const [PisError, setPIsError] = useState(null);
-  const [check,setIsChecked] = useState(false);
+  const [SisError, setSIsError] = useState(null);
+
+  const [check, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [name, setName, phone, setPhone, email, setEmail] = useContext(Details);
+  const [name, setName, phone, setPhone, email, setEmail, subject, setSubject] =
+    useContext(Details);
 
   const handleInputChange = (e) => {
     setEInput(e.target.value);
@@ -49,6 +60,9 @@ const ContactMe = () => {
   const handlePhoneChange = (e) => {
     setPInput(e.target.value);
   };
+  const handleSubjectChange = (e) => {
+    setSInput(e.target.value);
+  };
 
   //const isError = input === "";
   const handleClick = (e) => {
@@ -57,18 +71,27 @@ const ContactMe = () => {
     setIsclicked((prevState) => !prevState); // Toggle isClicked state
   };
   const handleCheckClick = (e) => {
-    e.preventDefault()
-    
+    e.preventDefault();
+
     //setIsChecked(true) //toggle isChecked state
     //setIsclicked((prevState) => !prevState) //toggle isClicked state
     try {
-      Einput === "" ? (setIsChecked(true),setEIsError(true)) : (setIsChecked(false),setEIsError(false));
-      Ninput === "" ? (setIsChecked(true),setNIsError(true)) : (setIsChecked(false),setNIsError(false));
-      Pinput === "" ? (setIsChecked(true),setPIsError(true)) : (setIsChecked(false),setPIsError(false));
+      Einput === ""
+        ? (setIsChecked(true), setEIsError(true))
+        : (setIsChecked(false), setEIsError(false));
+      Ninput === ""
+        ? (setIsChecked(true), setNIsError(true))
+        : (setIsChecked(false), setNIsError(false));
+      Pinput === ""
+        ? (setIsChecked(true), setPIsError(true))
+        : (setIsChecked(false), setPIsError(false));
+      Sinput === ""
+        ? (setIsChecked(true), setSIsError(true))
+        : (setIsChecked(false), setSIsError(false));
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   function isValidGmail(email) {
     const regex = /^[^\s@]+@gmail\.com$/;
     return regex.test(email);
@@ -78,57 +101,56 @@ const ContactMe = () => {
     e.preventDefault();
     //console.log(Einput)
     //setIsChecked(false)
-    
+
     // Simulate a network request
-    
+
     // Toggle isClicked state
     //setIsChecked(false)
     try {
       Einput === "" ? setEIsError(true) : setEIsError(false);
       Ninput === "" ? setNIsError(true) : setNIsError(false);
       Pinput === "" ? setPIsError(true) : setPIsError(false);
+      Sinput === "" ? setSIsError(true) : setSIsError(false);
+
       /*!(!name || !phone || !email)
       ? null
       : )*/
-      
-     //setLoading(true)
+
+      //setLoading(true)
       setTimeout(() => {
         setLoading(true);
-        
+
         // Hide the loading indicator after another 2 seconds and log the data
         setTimeout(() => {
           setLoading(false);
-        },1000);
-      },100);
-      if(!(!Ninput && !Pinput && !Einput)){
-        
+        }, 1000);
+      }, 100);
+      if (!(!Ninput && !Pinput && !Einput && !Sinput)) {
         /*try {
           console.log(email)
         } catch (error) {
           console.log(error)
         }*/
-        if(isValidGmail(Einput)){
-          console.log("ITS VALIDDD")
-          setName(Ninput)
-          setPhone(Pinput)
-          setEmail(Einput)
-          
-         
-          setIsclicked(false)
-        }
-        else{
-          console.log("ITS not VALIDD")
-          setEmail(null)
-          setEIsError(true)
-          setIsclicked(true)
-          setEInput("")
-          
+        if (isValidGmail(Einput)) {
+          console.log("ITS VALIDDD");
+          setName(Ninput);
+          setPhone(Pinput);
+          setEmail(Einput);
+          setSubject(Sinput);
+
+          setIsclicked(false);
+        } else {
+          console.log("ITS not VALIDD");
+          setEmail(null);
+          setEIsError(true);
+          setIsclicked(true);
+          setEInput("");
         }
       }
       /*!(!name && !phone && !email)
       ? )
       : null*/
-        
+
       /*(name === null || phone === null || email === null)
         ? null
         : (console.log("Name:", name),
@@ -147,26 +169,25 @@ const ContactMe = () => {
           // At least one error is true
           return null;
         }*/
-      
-        
     } catch (error) {
       console.log(error);
     }
   };
   useEffect(() => {
-    if(!(!Ninput && !Pinput && !Einput)){
+    if (!(!Ninput && !Pinput && !Einput)) {
       try {
-        console.log("Name:", name)
-        console.log("Phone No:", phone)
-        console.log("Email:", email)
-        setEInput("")
-        setNInput("")
-        setPInput("")
+        console.log("Name:", name);
+        console.log("Phone No:", phone);
+        console.log("Email:", email);
+        console.log("Subject:", subject);
+        setEInput("");
+        setNInput("");
+        setPInput("");
+        setSInput("");
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     }
-      
   }, [isClicked]);
   /*useEffect(()=>{
     console.log(".......................")
@@ -182,28 +203,76 @@ const ContactMe = () => {
   const theme = {
     //display:isClicked?"flex":"none",
     backgroundColor:
-      !EisError && !NisError && !PisError
+      !EisError && !NisError && !PisError && !SisError
         ? isClicked
           ? "#fbb9b6"
           : "none"
         : "#fbb9b6",
     borderRadius: "32px",
     width:
-      !EisError && !NisError && !PisError
+      !EisError && !NisError && !PisError && !SisError
         ? isClicked
           ? "500px"
           : "0px"
         : "500px",
     transition:
-      !EisError && !NisError && !PisError ? "width 1s ease-in-out" : "none",
+      !EisError && !NisError && !PisError && !SisError
+        ? "width 1s ease-in-out"
+        : "none",
   };
-  const buttonStyle = {
-    loadingText:"Submitting",
-    colorScheme:'teal',
-    variant:'outline'
-  
+  const FormStyle = {
+    width:
+      !EisError && !NisError && !PisError && !SisError
+        ? isClicked
+          ? "90%"
+          : "0px"
+        : "90%",
+    transition:
+      !EisError && !NisError && !PisError && !SisError
+        ? "width 0.5s ease-in-out"
+        : "none",
+    padding: "0",
+  };
+  const TextStyle = {
+    height:!EisError && !NisError && !PisError && !SisError
+    ? isClicked
+      ? "40px"
+      : "40px"
+    : "40px",
+    margin:'0',
+    opacity:
+      !EisError && !NisError && !PisError && !SisError
+        ? isClicked
+          ? "1"
+          : "0"
+        : "1",
+    width:
+      !EisError && !NisError && !PisError && !SisError
+        ? isClicked
+          ? "400px"
+          : "0px"
+        : "400px",
+    transition:
+      !EisError && !NisError && !PisError && !SisError
+        ? "width 1s ease-in-out"
+        : "none",
+    // padding:'0px'
+  };
+  const phoneStyle = {
+    opacity:
+      !EisError && !NisError && !PisError && !SisError
+        ? isClicked
+          ? "1"
+          : "0"
+        : "1",
   }
- 
+
+  const buttonStyle = {
+    loadingText: "Submitting",
+    colorScheme: "teal",
+    variant: "outline",
+  };
+
   return (
     <Box
       w="100%"
@@ -224,16 +293,28 @@ const ContactMe = () => {
         justifyContent="space-evenly"
         alignItems="center"
       >
-        <FormControl isRequired w="90%" mt="10px" isInvalid={NisError}>
-          <FormLabel w="200px">First name</FormLabel>
-          <InputGroup w="100%" display="flex" flexDirection="column">
+        <FormControl
+          isRequired
+          /*w="90%"*/ mt="10px"
+          isInvalid={NisError}
+          sx={FormStyle}
+        >
+          <FormLabel w="0px" style={TextStyle}>First name</FormLabel>
+          <InputGroup
+            w="0px"
+            display="flex"
+            flexDirection="column"
+            style={FormStyle}
+          >
             <Input
               placeholder="First name"
-              w="400px"
+              // w="400px"
+              // style
               border="solid"
               borderColor="black"
               value={Ninput}
               onChange={handleNameChange}
+              style={TextStyle}
             />
             {!NisError ? (
               <FormHelperText></FormHelperText>
@@ -242,10 +323,16 @@ const ContactMe = () => {
             )}
           </InputGroup>
         </FormControl>
-        <FormControl isRequired w="90%" mt="10px" isInvalid={PisError}>
-          <FormLabel w="200px">Phone No</FormLabel>
+        <FormControl
+          isRequired
+          w="90%"
+          mt="10px"
+          isInvalid={PisError}
+          style={FormStyle}
+        >
+          <FormLabel w="0px" style={TextStyle}>Phone No</FormLabel>
           <InputGroup w="100%" display="flex" flexDirection="column">
-            <InputLeftElement pointerEvents="none">
+            <InputLeftElement pointerEvents="none" style={phoneStyle}>
               <PhoneIcon color="black" />
             </InputLeftElement>
             <Input
@@ -256,6 +343,7 @@ const ContactMe = () => {
               borderColor="black"
               value={Pinput}
               onChange={handlePhoneChange}
+              style={TextStyle}
             />
             {!PisError ? (
               <FormHelperText></FormHelperText>
@@ -264,8 +352,14 @@ const ContactMe = () => {
             )}
           </InputGroup>
         </FormControl>
-        <FormControl isRequired w="90%" mt="10px" isInvalid={EisError}>
-          <FormLabel w="200px">Email</FormLabel>
+        <FormControl
+          isRequired
+          w="90%"
+          mt="10px"
+          isInvalid={EisError}
+          style={FormStyle}
+        >
+          <FormLabel w="0px" style={TextStyle}>Email</FormLabel>
           <InputGroup w="100%" display="flex" flexDirection="column">
             <Input
               placeholder="Email"
@@ -275,6 +369,7 @@ const ContactMe = () => {
               type="email"
               value={Einput}
               onChange={handleInputChange}
+              style={TextStyle}
             />
             {!EisError ? (
               <FormHelperText></FormHelperText>
@@ -339,8 +434,8 @@ const ContactMe = () => {
           <Box
             as="svg"
             className="lucide lucide-mail"
-            stroke-linejoin="round"
-            stroke-linecap="round"
+            strokeLinejoin="round"
+            strokeLinecap="round"
             //stroke-width="2"
             //stroke="currentColor"
             fill="none"
@@ -369,7 +464,9 @@ const ContactMe = () => {
           borderColor="#fbb9b6"
           overflow="hidden"
           transition="all 0.5s ease-in-out 0.2s, z-index 0.5s ease-in-out 0.2s"
-        ></Box>
+        >
+          <Image src={pic}></Image>
+        </Box>
         <Box
           className="bottom"
           position="absolute"
@@ -392,32 +489,36 @@ const ContactMe = () => {
             className="content"
             display="flex"
             flexDirection="column"
+            justifyContent="space-around"
             alignItems="center"
             position="absolute"
-            bottom="0"
+            bottom="2rem"
             left="1.5rem"
             right="1.5rem"
-            height="170px"
+            height="300px"
           >
             <Box
               as="span"
               className="name"
               display="block"
-              fontSize="1.2rem"
-              color="white"
+              fontSize="2rem"
+              color="black"
               fontWeight="bold"
             >
-              My Name
+              Krishnan E
             </Box>
             <Box
               as="span"
               className="about-me"
               display="block"
-              fontSize="0.9rem"
-              color="white"
-              marginTop="1rem"
+              fontSize="1.5rem"
+              color="black"
+              marginTop="0"
+              fontFamily="Roboto"
+              fontStyle="Roboto"
             >
-              Lorem ipsum dolor sit amet consectetur adipisicinFcls
+              Feel free to reach out if you have any questions or need
+              assistance.
             </Box>
           </Box>
           <Box
@@ -440,7 +541,7 @@ const ContactMe = () => {
               <Button
                 className="button"
                 bg="white"
-                color="#fbb9b6"
+                color="black"
                 border="none"
                 borderRadius="20px"
                 fontSize="xs"
@@ -455,11 +556,11 @@ const ContactMe = () => {
               >
                 Check again
               </Button>
-            ) :  (isClicked ? (
+            ) : isClicked ? (
               <Button
                 className="button"
                 bg="white"
-                color="#fbb9b6"
+                color="black"
                 border="none"
                 borderRadius="20px"
                 fontSize="xs"
@@ -470,7 +571,7 @@ const ContactMe = () => {
                 onClick={handleSubmitClick}
                 isLoading={loading}
                 style={buttonStyle}
-               
+
                 //onChange={handleClick}
               >
                 Submit
@@ -479,7 +580,7 @@ const ContactMe = () => {
               <Button
                 className="button"
                 bg="white"
-                color="#fbb9b6"
+                color="black"
                 border="none"
                 borderRadius="20px"
                 fontSize="xs"
@@ -492,7 +593,7 @@ const ContactMe = () => {
               >
                 Contact Me
               </Button>
-            ))}
+            )}
           </Box>
         </Box>
       </Box>
@@ -502,7 +603,37 @@ const ContactMe = () => {
         h="400px"
         bgColor="#fbb9b6"
         borderRadius="32px"
-      ></Box>
+        display="flex"
+        flexDirection="column"
+        justifyContent="space-evenly"
+        alignItems="center"
+      >
+        <FormControl
+          isRequired
+          w="90%"
+          mt="10px"
+          isInvalid={SisError}
+          sx={FormStyle}
+        >
+          <FormLabel w="0px" style={TextStyle}>Tell us more</FormLabel>
+          <InputGroup w="100%" display="flex" flexDirection="column">
+            <Input
+              placeholder="Subject"
+              w="400px"
+              border="solid"
+              borderColor="black"
+              value={Sinput}
+              onChange={handleSubjectChange}
+              style={TextStyle}
+            />
+            {!SisError ? (
+              <FormHelperText></FormHelperText>
+            ) : (
+              <FormErrorMessage>Subject is required.</FormErrorMessage>
+            )}
+          </InputGroup>
+        </FormControl>
+      </Box>
     </Box>
   );
 };
