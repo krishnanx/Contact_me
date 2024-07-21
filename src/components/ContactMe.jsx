@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import { Details } from "./contexts/DetailsContext";
 import pic from "../assets/pix1.jpg";
 //import roboto from url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-import { sendEmail} from "./Emailjs";
+import { sendEmail } from "./Emailjs";
 import {
   Box,
   Stack,
@@ -48,6 +48,14 @@ const ContactMe = () => {
 
   const [check, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const breakpoints = {
+    base: "0em", // 0px
+    sm: "30em", // ~480px. em is a relative unit and is dependant on the font size.
+    md: "48em", // ~768px
+    lg: "62em", // ~992px
+    xl: "80em", // ~1280px
+    "2xl": "96em", // ~1536px
+  };
   const [name, setName, phone, setPhone, email, setEmail, subject, setSubject] =
     useContext(Details);
 
@@ -184,7 +192,7 @@ const ContactMe = () => {
         setNInput("");
         setPInput("");
         setSInput("");
-        sendEmail(name,phone,email,subject)
+        sendEmail(name, phone, email, subject);
       } catch (error) {
         console.log(error);
       }
@@ -210,12 +218,12 @@ const ContactMe = () => {
           : "none"
         : "#fbb9b6",
     borderRadius: "32px",
-    width:
+    /*width:
       !EisError && !NisError && !PisError && !SisError
         ? isClicked
-          ? "500px"
+          ? {base:'100px',md:'500px'}
           : "0px"
-        : "500px",
+        : {base:'100px',md:'500px'},*/
     transition:
       !EisError && !NisError && !PisError && !SisError
         ? "width 1s ease-in-out"
@@ -235,28 +243,28 @@ const ContactMe = () => {
     padding: "0",
   };
   const TextStyle = {
-    height:!EisError && !NisError && !PisError && !SisError
+    /*height:!EisError && !NisError && !PisError && !SisError
     ? isClicked
       ? "40px"
       : "40px"
-    : "40px",
-    margin:'0',
-    opacity:
+    : "40px",*/
+    margin: "0",
+    /*opacity:
       !EisError && !NisError && !PisError && !SisError
         ? isClicked
           ? "1"
           : "0"
-        : "1",
-    width:
+        : "1",*/
+    /*width:
       !EisError && !NisError && !PisError && !SisError
         ? isClicked
           ? "400px"
           : "0px"
-        : "400px",
-    transition:
+        : "400px",*/
+    /*transition:
       !EisError && !NisError && !PisError && !SisError
         ? "width 1s ease-in-out"
-        : "none",
+        : "none",*/
     // padding:'0px'
   };
   const phoneStyle = {
@@ -266,7 +274,7 @@ const ContactMe = () => {
           ? "1"
           : "0"
         : "1",
-  }
+  };
 
   const buttonStyle = {
     loadingText: "Submitting",
@@ -277,22 +285,38 @@ const ContactMe = () => {
   return (
     <Box
       w="100%"
-      h="700px"
+      h={{base:"1200px",md:"700px"}}
       position="relative"
       display="flex"
       justifyContent="center"
       alignItems="center"
+      flexDirection={{ base: "column", md: "row" }}
+      
     >
       <Box
         style={theme}
-        w="0px"
-        h="400px"
         bgColor="#fbb9b6"
         borderRadius="32px"
         display="flex"
         flexDirection="column"
         justifyContent="space-evenly"
         alignItems="center"
+        w={
+          !EisError && !NisError && !PisError && !SisError
+            ? isClicked
+              ? { base: "300px", md: "500px" }
+              : "0px"
+            : { base: "300px", md: "500px" }
+          
+        }
+        opacity={
+          !EisError && !NisError && !PisError && !SisError
+            ? isClicked
+              ? "1"
+              : "0"
+            : "1"}
+        //w={{base:"300px",md:"500px"}}
+        h={{ base: "400px", md: "400px" }}
       >
         <FormControl
           isRequired
@@ -300,7 +324,36 @@ const ContactMe = () => {
           isInvalid={NisError}
           sx={FormStyle}
         >
-          <FormLabel w="0px" style={TextStyle}>First name</FormLabel>
+          <FormLabel
+            style={TextStyle}
+            h={
+              !EisError && !NisError && !PisError && !SisError
+                ? isClicked
+                  ? "40px"
+                  : "40px"
+                : "40px"
+            }
+            opacity={
+              !EisError && !NisError && !PisError && !SisError
+                ? isClicked
+                  ? "1"
+                  : "0"
+                : "1"
+            }
+            w={
+              !EisError && !NisError && !PisError && !SisError
+                ? isClicked
+                  ? { base: "100px", md: "400px" }
+                  : "100px"
+                : { base: "100px", md: "400px" }
+
+            }
+            transition={!EisError && !NisError && !PisError && !SisError
+              ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+              : "none"}
+          >
+            First name
+          </FormLabel>
           <InputGroup
             w="0px"
             display="flex"
@@ -316,6 +369,20 @@ const ContactMe = () => {
               value={Ninput}
               onChange={handleNameChange}
               style={TextStyle}
+              w={!EisError && !NisError && !PisError && !SisError
+                ? isClicked
+                  ? {base:'250px',md:"400px"}
+                  : "0px"
+                : {base:'250px',md:"400px"}}
+                opacity={
+                  !EisError && !NisError && !PisError && !SisError
+                    ? isClicked
+                      ? "1"
+                      : "0"
+                    : "1"}
+                    transition={!EisError && !NisError && !PisError && !SisError
+                      ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+                      : "none"}
             />
             {!NisError ? (
               <FormHelperText></FormHelperText>
@@ -331,7 +398,28 @@ const ContactMe = () => {
           isInvalid={PisError}
           style={FormStyle}
         >
-          <FormLabel w="0px" style={TextStyle}>Phone No</FormLabel>
+          <FormLabel 
+           h={!EisError && !NisError && !PisError && !SisError
+            ? isClicked
+              ? "40px"
+              : "40px"
+            : "40px"}
+          opacity={ !EisError && !NisError && !PisError && !SisError
+              ? isClicked
+                ? "1"
+                : "0"
+              : "1"}
+          w={!EisError && !NisError && !PisError && !SisError
+              ? isClicked
+                ? {base:'200px',md:"400px"}
+                : "0px"
+              : {base:'200px',md:"400px"}}
+              transition={!EisError && !NisError && !PisError && !SisError
+                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out"}
+                : "none"}
+          style={TextStyle}>
+            Phone No
+          </FormLabel>
           <InputGroup w="100%" display="flex" flexDirection="column">
             <InputLeftElement pointerEvents="none" style={phoneStyle}>
               <PhoneIcon color="black" />
@@ -339,7 +427,20 @@ const ContactMe = () => {
             <Input
               type="number"
               placeholder="Phone number"
-              w="400px"
+              w={!EisError && !NisError && !PisError && !SisError
+                ? isClicked
+                  ? {base:'250px',md:"400px"}
+                  : "0px"
+                : {base:'250px',md:"400px"}}
+              opacity={
+                !EisError && !NisError && !PisError && !SisError
+                  ? isClicked
+                    ? "1"
+                    : "0"
+                  : "1"}
+                  transition={!EisError && !NisError && !PisError && !SisError
+                    ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+                    : "none"}
               border="solid"
               borderColor="black"
               value={Pinput}
@@ -360,17 +461,51 @@ const ContactMe = () => {
           isInvalid={EisError}
           style={FormStyle}
         >
-          <FormLabel w="0px" style={TextStyle}>Email</FormLabel>
+          <FormLabel
+           h={!EisError && !NisError && !PisError && !SisError
+            ? isClicked
+              ? "40px"
+              : "40px"
+            : "40px"}
+          opacity={ !EisError && !NisError && !PisError && !SisError
+              ? isClicked
+                ? "1"
+                : "0"
+              : "1"}
+          w={!EisError && !NisError && !PisError && !SisError
+              ? isClicked
+                ? {base:'100px',md:"400px"}
+                : "0px"
+              : {base:'100px',md:"400px"}}
+              transition={!EisError && !NisError && !PisError && !SisError
+                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out"}
+                : "none"}
+           style={TextStyle}
+           >
+            Email
+          </FormLabel>
           <InputGroup w="100%" display="flex" flexDirection="column">
             <Input
               placeholder="Email"
-              w="400px"
+              w={!EisError && !NisError && !PisError && !SisError
+                ? isClicked
+                  ? {base:'250px',md:"400px"}
+                  : "0px"
+                : {base:'250px',md:"400px"}}
               border="solid"
               borderColor="black"
               type="email"
               value={Einput}
               onChange={handleInputChange}
               style={TextStyle}
+              opacity={ !EisError && !NisError && !PisError && !SisError
+                ? isClicked
+                  ? "1"
+                  : "0"
+                : "1"}
+              transition={!EisError && !NisError && !PisError && !SisError
+                ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+                : "none"}
             />
             {!EisError ? (
               <FormHelperText></FormHelperText>
@@ -384,8 +519,8 @@ const ContactMe = () => {
       <Box
         borderWidth="1px"
         textAlign="center"
-        w="500px"
-        h="400px"
+        w={{ base: "300px", md: "500px" }}
+        h={{ base: "300px", md: "400px" }}
         bgColor="white"
         borderRadius="32px"
         p="3px"
@@ -496,13 +631,13 @@ const ContactMe = () => {
             bottom="2rem"
             left="1.5rem"
             right="1.5rem"
-            height="300px"
+            h={{base:"200px",md:"300px"}}
           >
             <Box
               as="span"
               className="name"
               display="block"
-              fontSize="2rem"
+              fontSize={{base:"1rem",md:"2rem"}}
               color="black"
               fontWeight="bold"
             >
@@ -512,7 +647,7 @@ const ContactMe = () => {
               as="span"
               className="about-me"
               display="block"
-              fontSize="1.5rem"
+              fontSize={{base:"1rem",md:"1.5rem"}}
               color="black"
               marginTop="0"
               fontFamily="Roboto"
@@ -541,6 +676,9 @@ const ContactMe = () => {
             {!(!EisError && !NisError && !PisError) ? (
               <Button
                 className="button"
+                sx={{
+                  WebkitTapHighlightColor: "transparent",
+                }}
                 bg="white"
                 color="black"
                 border="none"
@@ -560,6 +698,9 @@ const ContactMe = () => {
             ) : isClicked ? (
               <Button
                 className="button"
+                sx={{
+                  WebkitTapHighlightColor: "transparent",
+                }}
                 bg="white"
                 color="black"
                 border="none"
@@ -579,6 +720,9 @@ const ContactMe = () => {
               </Button>
             ) : (
               <Button
+              sx={{
+                WebkitTapHighlightColor: "transparent",
+              }}
                 className="button"
                 bg="white"
                 color="black"
@@ -590,6 +734,7 @@ const ContactMe = () => {
                 boxShadow="0px 5px 5px rgba(165, 132, 130, 0.1333333333)"
                 _hover={{ bg: "#f55d56", color: "white" }}
                 onClick={handleClick}
+                //-webkitTapHighlightColor="transparent"
                 //onChange={handleClick}
               >
                 Contact Me
@@ -600,14 +745,20 @@ const ContactMe = () => {
       </Box>
       <Box
         style={theme}
-        w="0px"
-        h="400px"
         bgColor="#fbb9b6"
         borderRadius="32px"
         display="flex"
         flexDirection="column"
         justifyContent="space-evenly"
         alignItems="center"
+        w={
+          !EisError && !NisError && !PisError && !SisError
+            ? isClicked
+              ? { base: "300px", md: "500px" }
+              : "0px"
+            : { base: "300px", md: "500px" }
+        }
+        h={{ base: "400px", md: "400px" }}
       >
         <FormControl
           isRequired
@@ -616,16 +767,55 @@ const ContactMe = () => {
           isInvalid={SisError}
           sx={FormStyle}
         >
-          <FormLabel w="0px" style={TextStyle}>Tell us more</FormLabel>
+          <FormLabel
+            style={TextStyle}
+            h={
+              !EisError && !NisError && !PisError && !SisError
+                ? isClicked
+                  ? "40px"
+                  : "40px"
+                : "40px"
+            }
+            opacity={ !EisError && !NisError && !PisError && !SisError
+              ? isClicked
+                ? "1"
+                : "0"
+              : "1"}
+          w={!EisError && !NisError && !PisError && !SisError
+              ? isClicked
+                ? {base:'200px',md:"400px"}
+                : "0px"
+              : {base:'200px',md:"400px"}}
+              transition={!EisError && !NisError && !PisError && !SisError
+                ? {base:"width 1s ease-in-out,opacity 2.5s ease-in-out",md:"width 1s ease-in-out"}
+                : "none"}
+            
+          >
+            Tell us more
+          </FormLabel>
           <InputGroup w="100%" display="flex" flexDirection="column">
             <Input
               placeholder="Subject"
-              w="400px"
+              //w="400px"
               border="solid"
               borderColor="black"
               value={Sinput}
               onChange={handleSubjectChange}
               style={TextStyle}
+              w={!EisError && !NisError && !PisError && !SisError
+                ? isClicked
+                  ? {base:'250px',md:"400px"}
+                  : "0px"
+                : {base:'250px',md:"400px"}}
+              opacity={
+                !EisError && !NisError && !PisError && !SisError
+                  ? isClicked
+                    ? "1"
+                    : "0"
+                  : "1"}
+                  transition={!EisError && !NisError && !PisError && !SisError
+                    ? {base:"width 1s ease-in-out,opacity 2s ease-in-out",md:"width 1s ease-in-out"}
+                    : "none"}
             />
             {!SisError ? (
               <FormHelperText></FormHelperText>
