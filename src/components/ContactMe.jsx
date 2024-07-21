@@ -304,9 +304,9 @@ const ContactMe = () => {
         w={
           !EisError && !NisError && !PisError && !SisError
             ? isClicked
-              ? { base: "300px", md: "500px" }
+              ? { base: "350px", md: "500px" }
               : "0px"
-            : { base: "300px", md: "500px" }
+            : { base: "350px", md: "500px" }
           
         }
         opacity={
@@ -519,7 +519,7 @@ const ContactMe = () => {
       <Box
         borderWidth="1px"
         textAlign="center"
-        w={{ base: "300px", md: "500px" }}
+        w={{ base: "350px", md: "500px" }}
         h={{ base: "300px", md: "400px" }}
         bgColor="white"
         borderRadius="32px"
@@ -754,11 +754,17 @@ const ContactMe = () => {
         w={
           !EisError && !NisError && !PisError && !SisError
             ? isClicked
-              ? { base: "300px", md: "500px" }
+              ? { base: "350px", md: "500px" }
               : "0px"
-            : { base: "300px", md: "500px" }
+            : { base: "350px", md: "500px" }
         }
         h={{ base: "400px", md: "400px" }}
+        opacity={
+          !EisError && !NisError && !PisError && !SisError
+            ? isClicked
+              ? "1"
+              : "0"
+            : "1"}
       >
         <FormControl
           isRequired
