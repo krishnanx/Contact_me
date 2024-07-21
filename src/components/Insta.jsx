@@ -2,6 +2,9 @@ import React from 'react'
 
 import { Box } from '@chakra-ui/react'
 const Insta = () => {
+  const navigateToInsta = () => {
+    window.location.href = 'https://www.instagram.com/xkrishnanx/';
+  };
   return (
     <Box
         as="svg"
@@ -12,6 +15,7 @@ const Insta = () => {
         xmlns="http://www.w3.org/2000/svg"
         fill="black"
         _hover={{fill:"red"}}
+        onClick={navigateToInsta}
         >
         <path
             as="path"

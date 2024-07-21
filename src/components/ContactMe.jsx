@@ -49,6 +49,10 @@ const ContactMe = () => {
 
   const [check, setIsChecked] = useState(false);
   const [loading, setLoading] = useState(false);
+  const moveToEmail = () => {
+    window.location.href = "https://mail.google.com/mail/?view=cm&fs=1&to=abhishekkrishnan2006@gmail.com"
+
+  }
   const breakpoints = {
     base: "0em", // 0px
     sm: "30em", // ~480px. em is a relative unit and is dependant on the font size.
@@ -286,12 +290,12 @@ const ContactMe = () => {
   return (
     <Box
       w="100%"
-      h={{base:"1200px",md:"700px"}}
+      h={{base:"1200px",md:"1200px",lg:"100vh"}}
       position="relative"
       display="flex"
       justifyContent="center"
       alignItems="center"
-      flexDirection={{ base: "column", md: "row" }}
+      flexDirection={{ base: "column", md: "column" ,lg:"row"}}
       
     >
       <Box
@@ -305,9 +309,9 @@ const ContactMe = () => {
         w={
           !EisError && !NisError && !PisError && !SisError
             ? isClicked
-              ? { base: "350px", md: "400px" }
+              ? { base: "350px", md: "350px",lg:"400px" }
               : "0px"
-            : { base: "350px", md: "400px" }
+            : { base: "350px", md: "350px",lg:"400px"}
           
         }
         opacity={
@@ -520,8 +524,8 @@ const ContactMe = () => {
       <Box
         borderWidth="1px"
         textAlign="center"
-        w={{ base: "350px", md: "500px" }}
-        h={{ base: "300px", md: "400px" }}
+        w={{ base: "350px", md: "350px", lg:"500px"}}
+        h={{ base: "300px", md: "300px",lg:"400px" }}
         bgColor="white"
         borderRadius="32px"
         p="3px"
@@ -567,6 +571,10 @@ const ContactMe = () => {
           border="none"
           w="50px"
           h="50px"
+          x={{
+            WebkitTapHighlightColor: "transparent",
+          }}
+          onClick ={moveToEmail}
         >
           <Box
             as="svg"
@@ -583,6 +591,10 @@ const ContactMe = () => {
             stroke="#fbb9b6"
             strokeWidth="3px"
             _hover={{ stroke: "#f55d56" }}
+           
+           sx={{
+            WebkitTapHighlightColor: "transparent",
+          }}
           >
             <rect rx="2" y="4" x="2" height="16" width="20"></rect>
             <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
@@ -632,13 +644,13 @@ const ContactMe = () => {
             bottom="2rem"
             left="1.5rem"
             right="1.5rem"
-            h={{base:"200px",md:"300px"}}
+            h={{base:"200px",md:"200px",lg:"300px"}}
           >
             <Box
               as="span"
               className="name"
               display="block"
-              fontSize={{base:"1rem",md:"2rem"}}
+              fontSize={{base:"1rem",md:"1.5rem",lg:"2rem"}}
               color="black"
               fontWeight="bold"
             >
@@ -648,7 +660,7 @@ const ContactMe = () => {
               as="span"
               className="about-me"
               display="block"
-              fontSize={{base:"1rem",md:"1.5rem"}}
+              fontSize={{base:"1rem",md:"1rem",lg:"1.5rem"}}
               color="black"
               marginTop="0"
               fontFamily="Roboto"
@@ -674,7 +686,7 @@ const ContactMe = () => {
               <Twitter />
               <Github />
             </Box>
-            {!(!EisError && !NisError && !PisError) ? (
+            {!(!EisError && !NisError && !PisError && !SisError) ? (
               <Button
                 className="button"
                 sx={{
@@ -755,9 +767,9 @@ const ContactMe = () => {
         w={
           !EisError && !NisError && !PisError && !SisError
             ? isClicked
-              ? { base: "350px", md: "400px" }
+              ? { base: "350px", md: "350px",lg:"400px" }
               : "0px"
-            : { base: "350px", md: "400px" }
+            : { base: "350px", md: "350px",lg:"400px" }
         }
         h={{ base: "400px", md: "400px" }}
         opacity={

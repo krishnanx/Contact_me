@@ -1,5 +1,5 @@
 import react,{ useState } from 'react'
-import { Box } from '@chakra-ui/react'
+import { Box, flexbox } from '@chakra-ui/react'
 import './App.css'
 
 import ContactMe from './components/ContactMe'
@@ -8,8 +8,9 @@ import DetailsContext from './components/contexts/DetailsContext'
 function App() {
   const theme={
     display:"flex",
-    justifyContent:"Center",
+    justifyContent:"space-between",
     alignItems:"center",
+    flexDirection:"column",
     //width: "100%",
     //height:"100vh",
     /* Add your background pattern here */
@@ -31,7 +32,7 @@ document.head.appendChild(link);
   }
 
   return (
-    <Box style={theme} w="100%" h={{base:"1200px",md:"100vh"}}>
+    <Box style={theme} w="100%" h={{base:"1200px",md:"1300px",lg:"100vh"}}>
         <DetailsContext>
           <ContactMe/>
         </DetailsContext>
