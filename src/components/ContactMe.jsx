@@ -300,7 +300,7 @@ const ContactMe = () => {
     >
       <Box
         style={theme}
-        bgColor="#fbb9b6"
+        bgColor="#fb  b9b6"
         borderRadius="32px"
         display="flex"
         flexDirection="column"
@@ -366,7 +366,7 @@ const ContactMe = () => {
             style={FormStyle}
           >
             <Input
-              placeholder="First name"
+              placeholder="Name"
               // w="400px"
               // style
               border="solid"
